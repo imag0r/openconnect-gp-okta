@@ -95,7 +95,9 @@ def complete_saml(s, saml_resp_url, saml_resp_data):
     r = check(s.post(saml_resp_url, data=saml_resp_data))
     return r.headers['saml-username'], r.headers['prelogin-cookie']
 
-@click.command()
+@click.command(context_settings=dict(
+    ignore_unknown_options=True,
+))
 @click.argument('gateway')
 @click.argument('openconnect-args', nargs=-1)
 @click.option('--username')
